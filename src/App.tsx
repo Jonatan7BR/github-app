@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header';
-import Home from './pages/Home';
 import { useAppDispatch, useAppSelector } from './redux/hooks';
 import { changeTheme } from './redux/reducers/themeSlice';
 
@@ -33,15 +32,19 @@ const App = (): JSX.Element => {
             document.documentElement.style.setProperty('color-scheme', 'light');
             localStorage.setItem('darkMode', '0');
         }
-    }, [darkModeOn])
+    }, [darkModeOn]);
+
+    const Home = lazy(() => import('./pages/Home'));
 
     return (
         <>
             <Header />
             <BrowserRouter>
-                <Routes>
-                    <Route index element={<Home />} />
-                </Routes>
+                <Suspense fallback={<p>Loading...</p>}>
+                    <Routes>
+                        <Route index element={<Home />} />
+                    </Routes>
+                </Suspense>
             </BrowserRouter>
         </>
     );
