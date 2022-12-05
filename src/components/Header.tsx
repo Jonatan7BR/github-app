@@ -1,5 +1,5 @@
 import ThemeToggle from "./ThemeToggle";
-import './style/Header.scss';
+import './Header.scss';
 
 const Header = (): JSX.Element => {
     return (

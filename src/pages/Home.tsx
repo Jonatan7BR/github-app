@@ -1,6 +1,8 @@
+import Card from "../components/Card"
+
 const Home = (): JSX.Element => {
     return (
-        <p>Home works!</p>
+        <Card />
     );
 };
 

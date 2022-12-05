@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../redux/hooks"
 import { changeTheme } from "../redux/reducers/themeSlice";
-import './style/ThemeToggle.scss';
+import './ThemeToggle.scss';
 
 const ThemeToggle = (): JSX.Element => {
     const darkModeOn = useAppSelector(state => state.theme.darkModeOn);
