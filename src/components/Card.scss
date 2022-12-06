@@ -1,0 +1,27 @@
+/*<div className="details-card">
+            <img className="poster" alt="User avatar" src={avatar} />
+            <div className="details">
+                <h3 className="title">{user}/{repo}</h3>
+                <p><a className="url" href={url} target="_blank" rel="noreferrer">{url}</a></p>
+                <p className="subs">
+                    <span className="material-icons-outlined">star</span> {subsFormat}
+                </p>
+            </div>
+        </div>*/
+
+.details-card {
+    border: 1px solid var(--card-border);
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 5px;
+    height: 200px;
+
+    >.poster {
+        display: block;
+        max-width: 100%;
+        max-height: 190px;
+    }
+}

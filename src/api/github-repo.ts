@@ -1,5 +1,6 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"
-import { BASE_URL } from "../utils/github-repo"
+import { BASE_URL } from "../utils/github-repo.utils"
 
 interface ReposResponse {
     name: string;
@@ -11,7 +12,11 @@ interface ReposResponse {
     subscribers_count: number;
 }
 
-export const getRepo = async (path: string): Promise<ReposResponse> => {
-    let response = await axios.get<ReposResponse>(`${BASE_URL}${path}`);
-    return response.data;
-};
+export const getRepo = createAsyncThunk(
+    'gitHubRepo/getRepo', 
+    async (path: string): Promise<ReposResponse> => {
+        const response = await axios.get<ReposResponse>(`${BASE_URL}${path}`);
+        return response.data;
+    }
+);
+
