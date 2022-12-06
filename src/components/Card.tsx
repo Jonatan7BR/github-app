@@ -13,8 +13,10 @@ const Card = (props: Props): JSX.Element => {
         <div className="details-card">
             <img className="poster" alt="User avatar" src={avatar} />
             <div className="details">
-                <h3 className="title">{user}/{repo}</h3>
-                <p><a className="url" href={url} target="_blank" rel="noreferrer">{url}</a></p>
+                <h3 className="title">{user}/<span className="repo">{repo}</span></h3>
+                <p className="repourl">
+                    <a className="url" href={url} target="_blank" rel="noreferrer">{url}</a>
+                </p>
                 <p className="subs">
                     <span className="material-symbols-outlined">star</span> {subsFormat}
                 </p>
