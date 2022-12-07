@@ -1,4 +1,9 @@
 .this-repo {
     width: min(100%, 700px);
     margin: 20px auto;
+
+    >.reposearch {
+        margin: 8px auto;
+        font-size: 20pt;
+    }
 }

@@ -35,6 +35,7 @@ const gitHubRepoSlice = createSlice({
             })
             .addCase(getRepo.rejected, state => {
                 state.loading = false;
+                state.thisRepo = undefined;
             })
     }
 });
