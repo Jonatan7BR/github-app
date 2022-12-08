@@ -1,10 +1,10 @@
 import { GitHubRepo } from "../models/repo.model";
 
-import './Card.scss';
+import './RepoCard.scss';
 
 type Props = GitHubRepo;
 
-const Card = (props: Props): JSX.Element => {
+const RepoCard = (props: Props): JSX.Element => {
     const { url, avatar, user, repo, subs } = props;
 
     const subsFormat = new Intl.NumberFormat().format(subs);
@@ -25,4 +25,4 @@ const Card = (props: Props): JSX.Element => {
     );
 };
 
-export default Card;
+export default RepoCard;

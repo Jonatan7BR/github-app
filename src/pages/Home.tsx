@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { getRepo } from "../api/github-repo";
-import Card from "../components/Card"
+import RepoCard from "../components/RepoCard"
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { thisRepoName } from "../utils/github-repo.utils";
 
@@ -44,7 +44,7 @@ const Home = (): JSX.Element => {
                 <p>Loading...</p> :
                 !thisRepo ?
                 <p>No repository found</p> :
-                <Card 
+                <RepoCard 
                     url={thisRepo.url} 
                     avatar={thisRepo.avatar} 
                     user={thisRepo.user}
