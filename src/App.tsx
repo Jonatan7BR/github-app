@@ -35,7 +35,7 @@ const App = (): JSX.Element => {
     }, [darkModeOn]);
 
     const Home = lazy(() => import('./pages/Home'));
-    const Search = lazy(() => import('./pages/Search'));
+    const PullRequests = lazy(() => import('./pages/PullRequests'));
 
     return (
         <>
@@ -44,7 +44,7 @@ const App = (): JSX.Element => {
                 <Suspense fallback={<p>Loading...</p>}>
                     <Routes>
                         <Route index element={<Home />} />
-                        <Route path="/search" element={<Search />} />
+                        <Route path="/search" element={<PullRequests />} />
                     </Routes>
                 </Suspense>
             </BrowserRouter>

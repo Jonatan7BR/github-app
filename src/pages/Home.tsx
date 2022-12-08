@@ -30,19 +30,20 @@ const Home = (): JSX.Element => {
         <div className="this-repo">
             <form className="reposearch" onSubmit={submitForm}>
                 <input 
-                    className="" 
+                    className="textfield" 
                     type="text" 
                     value={search} 
                     placeholder="username/reponame"
                     onChange={changeSearch} 
+                    required
                 />
-                <button type="submit">Search</button>
+                <button className="button material-symbols-outlined" type="submit">search</button>
             </form>
             {
                 loading ?
                 <p>Loading...</p> :
                 !thisRepo ?
-                <p>Failed to fetch default repo</p> :
+                <p>No repository found</p> :
                 <Card 
                     url={thisRepo.url} 
                     avatar={thisRepo.avatar} 

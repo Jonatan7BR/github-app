@@ -4,6 +4,14 @@
 
     >.reposearch {
         margin: 8px auto;
-        font-size: 20pt;
+        display: flex;
+        gap: 5px;
+        width: 100%;
+        justify-content: center;
+
+        >.textfield,
+        >.button {
+            font-size: 18pt;
+        }
     }
 }
