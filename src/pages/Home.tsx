@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { getRepo } from "../api/github-repo";
 import RepoCard from "../components/RepoCard"
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { thisRepoName } from "../utils/github-repo.utils";
+import { DEFAULT_REPO } from "../utils/github-repo.utils";
 
 import './Home.scss';
 
@@ -14,8 +14,10 @@ const Home = (): JSX.Element => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        dispatch(getRepo(thisRepoName));
-    }, [dispatch]);
+        if (!thisRepo) {
+            dispatch(getRepo(DEFAULT_REPO));
+        }
+    }, [thisRepo, dispatch]);
 
     const changeSearch = (event: ChangeEvent<HTMLInputElement>): void => {
         setSearch(event.target.value);

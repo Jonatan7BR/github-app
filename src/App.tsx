@@ -44,7 +44,7 @@ const App = (): JSX.Element => {
                 <Suspense fallback={<p>Loading...</p>}>
                     <Routes>
                         <Route index element={<Home />} />
-                        <Route path="/search" element={<PullRequests />} />
+                        <Route path="/pr/:user/:repo" element={<PullRequests />} />
                     </Routes>
                 </Suspense>
             </BrowserRouter>

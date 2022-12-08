@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getRepo } from "../../api/github-repo";
-import { GitHubRepo } from "../../models/repo.model";
+import { getPullRequests, getRepo } from "../../api/github-repo";
+import { GitHubRepo, RepoPR } from "../../models/github-repo.model";
 
 interface GitHubRepoState {
     loading: boolean;
     thisRepo?: GitHubRepo;
-    searchedRepos: GitHubRepo[];
+    pullRequests: RepoPR[];
 }
 
 const initialState: GitHubRepoState = {
     loading: false,
-    searchedRepos: []
+    pullRequests: []
 };
 
 const gitHubRepoSlice = createSlice({
@@ -37,6 +37,26 @@ const gitHubRepoSlice = createSlice({
                 state.loading = false;
                 state.thisRepo = undefined;
             })
+
+            .addCase(getPullRequests.pending, state => {
+                state.loading = true;
+            })
+            .addCase(getPullRequests.fulfilled, (state, action) => {
+                state.loading = false;
+                const { payload } = action;
+                state.pullRequests = payload.map(pr => ({
+                    url: pr.html_url,
+                    author: pr.user.login,
+                    authorAvatar: pr.user.avatar_url,
+                    title: pr.title,
+                    description: pr.body,
+                    lastUpdate: pr.updated_at
+                }));
+            })
+            .addCase(getPullRequests.rejected, state => {
+                state.loading = false;
+                state.pullRequests = [];
+            });
     }
 });
 

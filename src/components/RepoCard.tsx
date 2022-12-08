@@ -1,4 +1,5 @@
-import { GitHubRepo } from "../models/repo.model";
+import { Link } from "react-router-dom";
+import { GitHubRepo } from "../models/github-repo.model";
 
 import './RepoCard.scss';
 
@@ -19,6 +20,7 @@ const RepoCard = (props: Props): JSX.Element => {
                 </p>
                 <p className="subs">
                     <span className="material-symbols-outlined">star</span> {subsFormat}
+                    <Link className="prslink" to={`/pr/${user}/${repo}`}>See pull requests</Link>
                 </p>
             </div>
         </div>
