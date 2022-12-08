@@ -19,7 +19,7 @@ const RepoCard = (props: Props): JSX.Element => {
                     <a className="url" href={url} target="_blank" rel="noreferrer">{url}</a>
                 </p>
                 <p className="subs">
-                    <span className="material-symbols-outlined">star</span> {subsFormat}
+                    <p><span className="material-symbols-outlined">star</span> {subsFormat}</p>
                     <Link className="prslink" to={`/pr/${user}/${repo}`}>See pull requests</Link>
                 </p>
             </div>

@@ -37,6 +37,16 @@
 
         >.subs {
             font-size: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+
+            >.prslink {
+                font-size: 12pt;
+                color: var(--hlink-color);
+                text-decoration: none;
+            }
         }
     }
 }
