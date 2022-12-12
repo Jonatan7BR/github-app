@@ -8,10 +8,6 @@ body {
         --text-color: #000;
         --card-border: #999;
         --hlink-color: #03F;
-        --pagination-button-border: #555;
-        --pagination-button-text: #000;
-        --pagination-button-bg: #ccc;
-        --pagination-button-active-text: #c0c;
     }
 
     &.darkmode {
@@ -19,9 +15,5 @@ body {
         --text-color: #fff;
         --card-border: #777;
         --hlink-color: #08F;
-        --pagination-button-border: #aaa;
-        --pagination-button-text: #fff;
-        --pagination-button-bg: #444;
-        --pagination-button-active-text: #0ee;
     }
 }

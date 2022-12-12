@@ -1,0 +1,24 @@
+.pr-card {
+    width: 100%;
+    border: 1px solid var(--card-border);
+    border-radius: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+
+    >.title {
+        >.link {
+            color: var(--hlink-color);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    >.author {
+        >.avatar {
+            width: 1em;
+        }
+    }
+}
