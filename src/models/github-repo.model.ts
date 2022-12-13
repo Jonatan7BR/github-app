@@ -4,7 +4,6 @@ export interface GitHubRepo {
     user: string;
     repo: string;
     avatar: string;
-    subs: number;
 }
 
 export interface RepoPR {
@@ -24,7 +23,6 @@ export interface ReposResponse {
         login: string;
         avatar_url: string;
     };
-    subscribers_count: number;
 }
 
 export interface ReposPullsResponse {

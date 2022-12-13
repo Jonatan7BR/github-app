@@ -6,9 +6,7 @@ import './RepoCard.scss';
 type Props = GitHubRepo;
 
 const RepoCard = (props: Props): JSX.Element => {
-    const { url, avatar, user, repo, subs } = props;
-
-    const subsFormat = new Intl.NumberFormat().format(subs);
+    const { url, avatar, user, repo } = props;
 
     return (
         <div className="details-card">
@@ -19,7 +17,6 @@ const RepoCard = (props: Props): JSX.Element => {
                     <a className="url" href={url} target="_blank" rel="noreferrer">{url}</a>
                 </p>
                 <p className="subs">
-                    <p><span className="material-symbols-outlined">star</span> {subsFormat}</p>
                     <Link className="prslink" to={`/pr/${user}/${repo}`}>See pull requests</Link>
                 </p>
             </div>

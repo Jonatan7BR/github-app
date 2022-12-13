@@ -2,22 +2,21 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { getRepo } from "../api/github-repo";
 import RepoCard from "../components/RepoCard"
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { DEFAULT_REPO } from "../utils/github-repo.utils";
+import { loadRepos } from "../redux/reducers/gitHubRepoSlice";
 
 import './Home.scss';
 
 const Home = (): JSX.Element => {
     let [search, setSearch] = useState('');
+    let [showingLocalRepos, setShowingLocalRepos] = useState(true);
 
     const loading = useAppSelector(state => state.gitHubRepo.loading);
     const thisRepo = useAppSelector(state => state.gitHubRepo.thisRepo);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (!thisRepo) {
-            dispatch(getRepo(DEFAULT_REPO));
-        }
-    }, [thisRepo, dispatch]);
+        dispatch(loadRepos());
+    }, [dispatch]);
 
     const changeSearch = (event: ChangeEvent<HTMLInputElement>): void => {
         setSearch(event.target.value);
@@ -25,12 +24,19 @@ const Home = (): JSX.Element => {
 
     const submitForm = (event: FormEvent<HTMLFormElement>): void => {
         event.preventDefault();
+        setShowingLocalRepos(false);
         dispatch(getRepo(search));
+    };
+
+    const resetForm = (): void => {
+        setSearch('');
+        setShowingLocalRepos(true);
+        dispatch(loadRepos());
     };
 
     return (
         <div className="this-repo">
-            <form className="reposearch" onSubmit={submitForm}>
+            <form className="reposearch" onSubmit={submitForm} onReset={resetForm}>
                 <input 
                     className="textfield" 
                     type="text" 
@@ -40,19 +46,26 @@ const Home = (): JSX.Element => {
                     required
                 />
                 <button className="button material-symbols-outlined" type="submit">search</button>
+                <button className="button material-symbols-outlined" type="reset">close</button>
             </form>
+            <p>{showingLocalRepos ? 'Last viewed:' : 'Search results:'}</p>
             {
                 loading ?
                 <p>Loading...</p> :
-                !thisRepo ?
-                <p>No repository found</p> :
-                <RepoCard 
-                    url={thisRepo.url} 
-                    avatar={thisRepo.avatar} 
-                    user={thisRepo.user}
-                    repo={thisRepo.repo}
-                    subs={thisRepo.subs}
-                />
+                thisRepo.length === 0 ?
+                <p>No repositories</p> :
+                <div className="repolist">
+                    {
+                        thisRepo.map(repo => (
+                            <RepoCard 
+                                url={repo.url} 
+                                avatar={repo.avatar} 
+                                user={repo.user}
+                                repo={repo.repo}
+                            />
+                        ))
+                    }
+                </div>
             }
         </div>
     );

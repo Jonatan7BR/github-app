@@ -1,22 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getPullRequests, getRepo } from "../../api/github-repo";
 import { GitHubRepo, RepoPR } from "../../models/github-repo.model";
+import { restoreRepos, storeNewRepo } from "../../utils/persist-repos.utils";
 
 interface GitHubRepoState {
     loading: boolean;
-    thisRepo?: GitHubRepo;
+    thisRepo: GitHubRepo[];
     pullRequests: RepoPR[];
 }
 
 const initialState: GitHubRepoState = {
     loading: false,
+    thisRepo: [],
     pullRequests: []
 };
 
 const gitHubRepoSlice = createSlice({
     name: 'gitHubRepo',
     initialState,
-    reducers: {},
+    reducers: {
+        loadRepos: (state) => {
+            state.thisRepo = restoreRepos();
+        }
+    },
     extraReducers(builder) {
         builder
             .addCase(getRepo.pending, state => {
@@ -25,17 +31,17 @@ const gitHubRepoSlice = createSlice({
             .addCase(getRepo.fulfilled, (state, action) => {
                 state.loading = false;
                 const { payload } = action;
-                state.thisRepo = {
+                let repo: GitHubRepo = {
                     url: payload.html_url,
                     user: payload.owner.login,
                     repo: payload.name,
                     avatar: payload.owner.avatar_url,
-                    subs: payload.subscribers_count
-                };
+                }
+                state.thisRepo = [repo];
+                storeNewRepo(repo);
             })
             .addCase(getRepo.rejected, state => {
                 state.loading = false;
-                state.thisRepo = undefined;
             })
 
             .addCase(getPullRequests.pending, state => {
@@ -59,5 +65,7 @@ const gitHubRepoSlice = createSlice({
             });
     }
 });
+
+export const { loadRepos } = gitHubRepoSlice.actions;
 
 export default gitHubRepoSlice.reducer;
