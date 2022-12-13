@@ -56,8 +56,9 @@ const Home = (): JSX.Element => {
                 <p>No repositories</p> :
                 <div className="repolist">
                     {
-                        thisRepo.map(repo => (
+                        thisRepo.map((repo, index) => (
                             <RepoCard 
+                                key={`repo-${index}`}
                                 url={repo.url} 
                                 avatar={repo.avatar} 
                                 user={repo.user}
