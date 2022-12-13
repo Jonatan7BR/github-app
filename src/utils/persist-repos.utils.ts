@@ -8,13 +8,14 @@ export const restoreRepos = (): GitHubRepo[] => {
     return [];
 };
 
-export const storeNewRepo = (repo: GitHubRepo): void => {
+export const storeNewRepo = (newRepo: GitHubRepo): void => {
     const savedRepos = restoreRepos();
-    if (!savedRepos.find(r => r.user === repo.user && r.repo === repo.repo)) {
-        if (savedRepos.length === 20) {
-            savedRepos.pop();
-        }
-        savedRepos.unshift(repo);
+    if (savedRepos.find(r => r.user === newRepo.user && r.repo === newRepo.repo)) {
+        return;
     }
+    if (savedRepos.length === 20) {
+        savedRepos.pop();
+    }
+    savedRepos.unshift(newRepo);
     localStorage.setItem('repos', JSON.stringify(savedRepos));
 };

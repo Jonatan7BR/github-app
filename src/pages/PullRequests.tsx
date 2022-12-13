@@ -10,6 +10,7 @@ import './PullRequests.scss';
 const PullRequests = (): JSX.Element => {
     const { user, repo } = useParams();
     const pullRequests = useAppSelector(state => state.gitHubRepo.pullRequests);
+    const loading = useAppSelector(state => state.gitHubRepo.loading);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -18,7 +19,12 @@ const PullRequests = (): JSX.Element => {
 
     return (
         <div className="repo-prs">
+            <p>Pull requests for {user}/{repo}:</p>
             {
+                loading ? 
+                <p>Loading...</p> :
+                pullRequests.length === 0 ?
+                <p>There are no pull requests for this repository</p> :
                 pullRequests
                     .slice()
                     .sort((a, b) => moment(a.lastUpdate).diff(moment(b.lastUpdate)))
